@@ -15,4 +15,4 @@ COPY ./src /code/src
 
 EXPOSE 8000
 
-CMD ["fastapi", "run", "src/main.py", "--port", "80"]
+CMD ["fastapi", "run", "src/main.py", "--port", "8000"]
