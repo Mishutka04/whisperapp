@@ -53,10 +53,10 @@ class Operation(BaseModel):
 @router.post("/file_to_text")
 async def get_file(file: UploadFile = File(...)):
     # Сохранение загруженного файла
-    file_location = f"uploads/{file.filename}"
+    file_location = file.filename
     with open(file_location, "wb") as buffer:
         shutil.copyfileobj(file.file, buffer)
-
+    print(file_location)
     # Обработка файла (например, передаем имя файла в pipe)
     result = pipe(file_location)
 
