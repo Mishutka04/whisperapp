@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  nginx:
+    image: nginx:stable-alpine
+    ports:
+      - "8080:80"
+      - "443:443"
+    volumes:
+      - './nginx.conf:/etc/nginx/nginx.conf'
+      - /etc/letsencrypt/live/zakupkiru.firecalculation.ru/fullchain.pem:/etc/letsencrypt/live/zakupkiru.firecalculation.ru/fullchain.pem
+      - /etc/letsencrypt/live/zakupkiru.firecalculation.ru/privkey.pem:/etc/letsencrypt/live/zakupkiru.firecalculation.ru/privkey.pem
+      - ./:/var/www/html
+    networks:
+      - dev
+    depends_on:
+      - frontend
+      - backend
+
+  frontend:
+    build:
+      context: ./front  # Path to directory with Dockerfile for Vue.js
+    networks:
+      - dev
+  backend:
+    build: ./backend/
+    container_name: fastapi_app
+    volumes:
+      - .:/app
+    environment:
+      - DEBUG=1
+    networks:
+      - dev
+
+networks:
+  dev:
