@@ -56,7 +56,6 @@ def get_file(file: UploadFile = File(...)):
     file_location = file.filename
     with open(file_location, "wb") as buffer:
         shutil.copyfileobj(file.file, buffer)
-    print(file_location)
     # Обработка файла (например, передаем имя файла в pipe)
     result = pipe(file_location)
 
