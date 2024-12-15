@@ -51,7 +51,7 @@ class Operation(BaseModel):
 
 
 @router.post("/file_to_text")
-async def get_file(file: UploadFile = File(...)):
+def get_file(file: UploadFile = File(...)):
     # Сохранение загруженного файла
     file_location = file.filename
     with open(file_location, "wb") as buffer:
