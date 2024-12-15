@@ -22,6 +22,7 @@ services:
       context: ./front  # Path to directory with Dockerfile for Vue.js
     networks:
       - dev
+
   backend:
     build: ./backend/
     container_name: fastapi_app
